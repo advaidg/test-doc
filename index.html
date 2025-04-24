@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GenAI for Java Developers - Session Document</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 1in;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Roboto Slab', serif;
+            color: #34495e;
+        }
+        h1 {
+            font-size: 22pt;
+            margin-top: 30pt;
+            margin-bottom: 10pt;
+            text-align: center;
+            text-shadow: 1px 1px 2px #ccc;
+        }
+        h2 {
+            font-size: 18pt;
+            margin-top: 24pt;
+            margin-bottom: 8pt;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 4px;
+        }
+        h3 {
+            font-size: 16pt;
+            margin-top: 20pt;
+            margin-bottom: 6pt;
+        }
+        h4 {
+            font-size: 14pt;
+            margin-top: 16pt;
+            margin-bottom: 6pt;
+        }
+        p {
+            margin-top: 6pt;
+            margin-bottom: 10pt;
+            font-size: 12pt;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #ecf0f1;
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-size: 95%;
+            color: #e74c3c;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #bdc3c7;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .bad-example, .good-example {
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 6px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .bad-example {
+            background-color: #fbeaea;
+            border-left: 5px solid #e74c3c;
+        }
+        .good-example {
+            background-color: #eafaf1;
+            border-left: 5px solid #2ecc71;
+        }
+        ul, ol {
+            margin-top: 6pt;
+            margin-bottom: 10pt;
+            padding-left: 30pt;
+        }
+        ul li, ol li {
+            margin-bottom: 6pt;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16pt 0;
+            background-color: #ffffff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+        .note {
+            background-color: #eaf2f8;
+            border-left: 5px solid #3498db;
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 6px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .highlight {
+            background-color: #fcf8e3;
+            padding: 4px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>GenAI for Java Developers: Advanced Prompt Engineering &amp; GitHub Copilot</h1>
+    
+    <h2>Introduction to Effective Prompt Engineering</h2>
+    
+    <h3>Core Principles of Effective Prompting</h3>
+    
+    <h4>1. Provide Specific Context</h4>
+    <ul>
+        <li><strong>Technical Environment:</strong> Specify frameworks, versions, and technologies</li>
+        <li><strong>Business Context:</strong> Explain the purpose and requirements</li>
+        <li><strong>Constraints:</strong> Mention performance needs, security considerations, etc.</li>
+        <li><strong>Existing Patterns:</strong> Reference your coding standards or architectural patterns</li>
+    </ul>
+    
+    <h4>2. Structure Your Prompts</h4>
+    <ul>
+        <li><strong>Clear Organization:</strong> Use sections with headers</li>
+        <li><strong>Numbered Lists:</strong> Break complex requirements into digestible points</li>
+        <li><strong>Hierarchical Format:</strong> Group related requirements together</li>
+        <li><strong>Visual Spacing:</strong> Make the prompt readable for better parsing</li>
+    </ul>
+    
+    <h4>3. Set Explicit Expectations</h4>
+    <ul>
+        <li><strong>Output Format:</strong> Specify how you want the response structured</li>
+        <li><strong>Code Style:</strong> Mention naming conventions and patterns to follow</li>
+        <li><strong>Documentation:</strong> Request comments, JavaDoc, or other documentation requirements</li>
+        <li><strong>Error Handling:</strong> Specify how exceptions should be managed</li>
+    </ul>
+    
+    <h4>4. Include Examples When Helpful</h4>
+    <ul>
+        <li><strong>Input/Output Examples:</strong> Show sample data and expected results</li>
+        <li><strong>Pattern Examples:</strong> Demonstrate coding patterns you want followed</li>
+        <li><strong>Edge Cases:</strong> Identify challenging scenarios that need handling</li>
+    </ul>
+    
+    <h4>5. Refine Through Iteration</h4>
+    <ul>
+        <li><strong>Start Broad:</strong> Begin with core functionality</li>
+        <li><strong>Refine:</strong> Add specific requirements or optimizations</li>
+        <li><strong>Reference:</strong> Refer to previous exchanges when building complexity</li>
+    </ul>
+    
+    <h3>From Basic to Advanced: Prompt Evolution</h3>
+    
+    <div class="bad-example">
+        <h4>Basic (Ineffective)</h4>
+        <pre>Write Java code for user authentication.</pre>
+    </div>
+    
+    <div>
+        <h4>Better</h4>
+        <pre>Create a Spring Boot authentication service using Java 17.</pre>
+    </div>
+    
+    <div>
+        <h4>Good</h4>
+        <pre>Create a Spring Boot (v2.7) user authentication service with JWT tokens.
+Include methods for login, registration, and token validation.
+Use Spring Security and store users in an Oracle database.</pre>
+    </div>
+    
+    <div class="good-example">
+        <h4>Advanced (Highly Effective)</h4>
+        <pre>Create a comprehensive Spring Boot (v3.1) authentication service with these requirements:
+
+Technical stack:
+- Java 17 with Spring Boot 3.1
+- Spring Security with JWT authentication
+- JPA/Hibernate for Oracle 19c database access
+- Maven project structure
+
+Functional requirements:
+1. User registration with email verification
+2. Login with username/password returning JWT token
+3. Token refresh mechanism
+4. Password reset functionality
+5. Role-based authorization (ADMIN, USER, GUEST roles)
+6. Account locking after failed login attempts
+
+Security requirements:
+- Password hashing with BCrypt
+- Token expiration after 30 minutes
+- Input validation against SQL injection and XSS
+- CSRF protection
+- Proper exception handling with custom error responses
+
+Performance considerations:
+- Implement caching for user details
+- Optimize database queries for high-volume authentication
+
+Please provide:
+- Complete controller, service, and repository implementations
+- Proper error handling with custom exceptions
+- Unit tests for critical authentication flows
+- Configuration for Oracle database integration</pre>
+    </div>
+    
+    <h3>Key Improvements in Advanced Prompts</h3>
+    <ol>
+        <li><strong>Specificity:</strong> Exact versions, technologies, and implementation details</li>
+        <li><strong>Comprehensiveness:</strong> Covering functional, security, and performance aspects</li>
+        <li><strong>Structure:</strong> Organized, easy-to-parse format</li>
+        <li><strong>Clear Expectations:</strong> Explicit deliverables and quality standards</li>
+    </ol>
+    
+    <h2>Practical Examples: Effective Prompt Engineering for Java</h2>
+    
+    <h3>Example 1: Spring Boot API Development</h3>
+    
+    <div class="bad-example">
+        <h4>BAD PROMPT:</h4>
+        <pre>Write a Spring Boot REST API for users.</pre>
+        
+        <p><strong>RESULT:</strong> Generic, basic controller without proper error handling, validation, or service layers.</p>
+    </div>
+    
+    <div class="good-example">
+        <h4>GOOD PROMPT:</h4>
+        <pre>Create a complete Spring Boot REST API for user management with the following requirements:
+
+Technical specifications:
+- Spring Boot 3.2
+- Java 17 features (records, pattern matching)
+- Spring Data JPA with Oracle database
+- Input validation using Bean Validation API
+- Proper exception handling with @ControllerAdvice
+
+Required endpoints:
+- GET /api/users - List all users with pagination and sorting
+- GET /api/users/{id} - Get user by ID
+- POST /api/users - Create new user with validation
+- PUT /api/users/{id} - Update existing user
+- DELETE /api/users/{id} - Delete user
+
+User entity should have:
+- id (auto-generated)
+- username (unique, 3-50 chars)
+- email (unique, valid format)
+- firstName, lastName
+- role (ADMIN, USER, GUEST)
+- createdDate, lastModifiedDate (auto-managed)
+
+Include:
+- Service layer with business logic
+- Repository interface with custom query methods
+- Proper HTTP status codes and error responses
+- Unit tests for controller and service layers</pre>
+        
+        <p><strong>RESULT:</strong> Complete Spring Boot application with:</p>
+        <ul>
+            <li>Properly structured packages</li>
+            <li>Entity with validation</li>
+            <li>Controller with all endpoints</li>
+            <li>Service layer with business logic</li>
+            <li>Repository with custom methods</li>
+            <li>Exception handling</li>
+            <li>Unit tests</li>
+        </ul>
+    </div>
+    
+    <h3>Example 2: Spring Batch Job Development</h3>
+    
+    <div class="bad-example">
+        <h4>BAD PROMPT:</h4>
+        <pre>Write a Spring Batch job for CSV processing.</pre>
+        
+        <p><strong>RESULT:</strong> Basic job with minimal configuration and no error handling.</p>
+    </div>
+    
+    <div class="good-example">
+        <h4>GOOD PROMPT:</h4>
+        <pre>Create a Spring Batch job that processes customer transaction data with these requirements:
+
+Technical context:
+- Spring Boot 3.1 with Spring Batch
+- Java 17
+- Oracle database for job repository and destination tables
+
+Input:
+- CSV files with transaction records (potentially containing millions of rows)
+- CSV format: transaction_id,customer_id,amount,date,status,store_id
+- Files arrive in a specific directory daily
+
+Requirements:
+- Read transactions from CSV files in chunks of 1000
+- Skip and log records with invalid formats
+- Validate transaction data (non-negative amounts, valid dates)
+- Enrich data with store information from Oracle database
+- Calculate transaction fees based on amount and store type
+- Write processed data to CUSTOMER_TRANSACTIONS table
+- Generate a daily summary report with transaction counts and totals
+- Implement restart capability for failed jobs
+- Include proper error handling and notification
+
+Performance requirements:
+- Must process 1 million records in under 30 minutes
+- Optimize database operations (batch updates)
+- Include processor, reader and writer implementations</pre>
+        
+        <p><strong>RESULT:</strong> Complete Spring Batch job with:</p>
+        <ul>
+            <li>Job configuration with chunk processing</li>
+            <li>Custom ItemReader for CSV files</li>
+            <li>Custom ItemProcessor with validation and enrichment</li>
+            <li>Custom ItemWriter for database operations</li>
+            <li>Step configuration with error handling</li>
+            <li>Proper transaction management</li>
+            <li>Listener implementations for monitoring and reporting</li>
+        </ul>
+    </div>
+    
+    <h3>Example 3: Oracle SQL Query Optimization</h3>
+    
+    <div class="bad-example">
+        <h4>BAD PROMPT:</h4>
+        <pre>Write a query to find orders by customer.</pre>
+        
+        <p><strong>RESULT:</strong> Basic SELECT statement without optimization.</p>
+    </div>
+    
+    <div class="good-example">
+        <h4>GOOD PROMPT:</h4>
+        <pre>I need an optimized Oracle SQL query for our order processing system with these details:
+
+Database context:
+- Oracle 19c with partitioning and parallel query support
+- Tables have millions of records
+- CUSTOMERS table has 5M+ records, partitioned by region
+- ORDERS table has 50M+ records, partitioned by order_date
+- ORDER_ITEMS table has 200M+ records
+
+Tables and key columns:
+- CUSTOMERS (customer_id PK, name, email, region_id, status)
+- ORDERS (order_id PK, customer_id FK, order_date, status, total_amount)
+- ORDER_ITEMS (item_id PK, order_id FK, product_id FK, quantity, price)
+- PRODUCTS (product_id PK, name, category_id, price)
+
+Query needs:
+- Find all orders with items for a specific customer within a date range
+- Include customer details, order information, and product details
+- Calculate subtotals per product category
+- Filter for only 'COMPLETED' orders
+- Sort by order date (newest first)
+
+Performance requirements:
+- Must execute in under 500ms for customers with up to 1000 orders
+- Consider appropriate index usage
+- Include execution plan hints if necessary</pre>
+        
+        <p><strong>RESULT:</strong> Optimized Oracle SQL query with:</p>
+        <ul>
+            <li>Proper JOIN strategy</li>
+            <li>Appropriate index hints</li>
+            <li>Partition pruning optimization</li>
+            <li>Efficient aggregation approach</li>
+            <li>Execution plan considerations</li>
+        </ul>
+    </div>
+    
+    <h2>GitHub Copilot for Java Development</h2>
+    
+    <h3>Example 1: Spring Boot Service Implementation</h3>
+    
+    <div class="bad-example">
+        <h4>BAD APPROACH:</h4>
+        <pre>// Create a service for order processing
+public class OrderService {
+}</pre>
+    </div>
+    
+    <div class="good-example">
+        <h4>GOOD APPROACH:</h4>
+        <pre>/**
+ * OrderService handles business logic for order processing in the e-commerce system.
+ * 
+ * Technical context:
+ * - Spring Boot 3.2 application with transactional services
+ * - Integration with Oracle database via Spring Data JPA
+ * - Async processing using Spring's @Async for notifications
+ * - Caching implementation for product catalog
+ * 
+ * Business requirements:
+ * - Validate order details before processing
+ * - Apply appropriate discounts based on customer loyalty status
+ * - Check inventory availability before confirming order
+ * - Generate order confirmation with unique reference number
+ * - Send notification to fulfillment system
+ * - Update customer purchase history
+ * 
+ * Performance requirements:
+ * - Order processing should complete within 2 seconds
+ * - Implement optimistic locking for concurrent order processing
+ * - Use batch updates for inventory adjustments
+ * 
+ * @author [Your Name]
+ */
+@Service
+@Transactional
+public class OrderService {
+    // Dependencies and methods will be generated
+}</pre>
+
+        <p><strong>RESULT:</strong> Complete service implementation with:</p>
+        <ul>
+            <li>All required dependencies properly injected</li>
+            <li>Comprehensive validation logic</li>
+            <li>Transaction management</li>
+            <li>Async method for notifications</li>
+            <li>Cache usage for product information</li>
+            <li>Comprehensive error handling</li>
+        </ul>
+    </div>
+    
+    <h3>Example 2: Spring Batch Step Implementation</h3>
+    
+    <div class="bad-example">
+        <h4>BAD APPROACH:</h4>
+        <pre>// Create a step for processing transactions
+public Step processTransactions(StepBuilderFactory stepBuilderFactory) {
+}</pre>
+    </div>
+    
+    <div class="good-example">
+        <h4>GOOD APPROACH:</h4>
+        <pre>/**
+ * Creates a step for processing financial transactions from input files.
+ * 
+ * Technical context:
+ * - Spring Batch 5.0 with chunk-oriented processing
+ * - Custom error handling and skip policy
+ * - Transaction-level retry capabilities
+ * - Database partitioning for parallel processing
+ * 
+ * Step behavior:
+ * 1. Reads transactions from CSV files using DelimitedLineTokenizer
+ * 2. Validates transaction data (amount, date, account numbers)
+ * 3. Enriches with account information from database
+ * 4. Calculates fees and adjusts balances
+ * 5. Writes to PROCESSED_TRANSACTIONS table
+ * 6. Generates audit records for each batch
+ * 
+ * Error handling:
+ * - Skip invalid records after 3 retry attempts
+ * - Log detailed error information for manual review
+ * - Maintain counts of processed/skipped items
+ * 
+ * @param jobRepository The job repository
+ * @param transactionManager The transaction manager
+ * @param transactionReader Custom reader for transaction data
+ * @param transactionProcessor Processor for business logic
+ * @param transactionWriter Writer for saving results
+ * @return Fully configured Step for transaction processing
+ */
+@Bean
+public Step processTransactions(
+        JobRepository jobRepository,
+        PlatformTransactionManager transactionManager,
+        ItemReader<Transaction> transactionReader,
+        ItemProcessor<Transaction, ProcessedTransaction> transactionProcessor,
+        ItemWriter<ProcessedTransaction> transactionWriter) {
+}</pre>
+
+        <p><strong>RESULT:</strong> Complete Step implementation with:</p>
+        <ul>
+            <li>Proper chunk configuration</li>
+            <li>Comprehensive error handling</li>
+            <li>Skip and retry policies</li>
+            <li>Listener configuration</li>
+            <li>Transaction management</li>
+        </ul>
+    </div>
+    
+    <h3>Example 3: Oracle Integration with JPA Repository</h3>
+    
+    <div class="bad-example">
+        <h4>BAD APPROACH:</h4>
+        <pre>// Create a repository for customer data
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+}</pre>
+    </div>
+    
+    <div class="good-example">
+        <h4>GOOD APPROACH:</h4>
+        <pre>/**
+ * Repository for Customer entity operations with optimized Oracle-specific queries.
+ * 
+ * Technical context:
+ * - Spring Data JPA 3.1 with Hibernate 6.2
+ * - Oracle 19c database with partitioning
+ * - High-volume operations (5000+ reads/sec, 500+ writes/sec)
+ * 
+ * Entity details:
+ * - Customer entity is partitioned by region_id
+ * - Contains sensitive data requiring row-level security
+ * - Has complex relationships with Orders, Address, and Preferences
+ * 
+ * Performance considerations:
+ * - Implement query hints for partition selection
+ * - Use paging and sorting for large result sets
+ * - Apply proper fetch strategies for entity relationships
+ * - Consider native queries for complex operations
+ * 
+ * Auditing requirements:
+ * - Track all modifications with created/modified timestamps
+ * - Maintain change history for compliance
+ */
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+    
+    /**
+     * Finds active customers in a specific region with orders above threshold.
+     * Uses Oracle partition hints for performance.
+     * 
+     * @param regionId the region identifier
+     * @param orderThreshold minimum order value to include
+     * @param pageable pagination and sorting information
+     * @return page of matching customers with order summaries
+     */
+    @Query(value = "SELECT /*+ INDEX(c IDX_CUSTOMER_REGION) */ " +
+           "c.*, SUM(o.total_amount) as orderTotal " +
+           "FROM customers c " +
+           "JOIN orders o ON c.customer_id = o.customer_id " +
+           "WHERE c.region_id = :regionId " +
+           "AND c.status = 'ACTIVE' " +
+           "GROUP BY c.customer_id " +
+           "HAVING SUM(o.total_amount) > :orderThreshold",
+           countQuery = "SELECT COUNT(DISTINCT c.customer_id) " +
+           "FROM customers c " +
+           "JOIN orders o ON c.customer_id = o.customer_id " +
+           "WHERE c.region_id = :regionId " +
+           "AND c.status = 'ACTIVE' " +
+           "GROUP BY c.customer_id " +
+           "HAVING SUM(o.total_amount) > :orderThreshold",
+           nativeQuery = true)
+    Page<CustomerSummary> findActiveCustomersWithOrdersAboveThreshold(
+            @Param("regionId") Long regionId,
+            @Param("orderThreshold") BigDecimal orderThreshold,
+            Pageable pageable);
+}</pre>
+
+        <p><strong>RESULT:</strong> Optimized repository with:</p>
+        <ul>
+            <li>Specialized query methods</li>
+            <li>Performance optimizations with query hints</li>
+            <li>Native queries for complex operations</li>
+            <li>Proper parameter handling</li>
+            <li>Pagination support</li>
+        </ul>
+    </div>
+    
+    <h2>Combined Workflow Example</h2>
+    
+    <h3>Building a Spring Boot Batch Application for Financial Data Processing</h3>
+    
+    <h4>Step 1: Use GenAI to design the solution architecture</h4>
+    
+    <div class="note">
+        <p><strong>Use standalone AI (ChatGPT/Claude) for high-level design</strong></p>
+        
+        <p><strong>PROMPT:</strong></p>
+        <pre>Design a Spring Boot application architecture for processing financial transactions with these requirements:
+
+Business needs:
+- Daily import of transaction files (CSV) with millions of records
+- Validation against business rules and reference data
+- Enrichment with customer information from Oracle database
+- Calculation of fees and tax implications
+- Generation of summary reports and audit trails
+- RESTful API to check processing status and results
+
+Technical requirements:
+- Spring Boot 3.2 with Java 17
+- Spring Batch for file processing
+- Spring Data JPA with Oracle 19c database
+- Multithreaded processing for performance
+- Comprehensive error handling and recovery
+- Security compliance with financial regulations
+- Monitoring and alerting capabilities
+
+Please provide:
+1. High-level component architecture
+2. Key class/interface definitions
+3. Database schema recommendations
+4. API endpoint specifications
+5. Batch job design with steps and flow</pre>
+    </div>
+    
+    <h4>Step 2: Use GitHub Copilot to implement key components</h4>
+    
+    <div class="note">
+        <p><strong>Implement the design using GitHub Copilot with detailed comments</strong></p>
+        
+        <pre>/**
+ * Configuration for the Financial Transaction Processing Job.
+ * 
+ * Job Flow:
+ * 1. Read transaction files from input directory
+ * 2. Parse and validate transaction records
+ * 3. Enrich with customer and reference data
+ * 4. Calculate fees and taxes
+ * 5. Write to transaction database
+ * 6. Generate summary reports
+ * 
+ * Technical Details:
+ * - Multi-threaded step execution for performance
+ * - Partitioned processing for large files
+ * - Skip policy for handling invalid records
+ * - Listener implementation for monitoring and alerting
+ * - Oracle-optimized batch writing
+ * 
+ * @see TransactionReader
+ * @see TransactionProcessor
+ * @see TransactionWriter
+ */
+@Configuration
+@EnableBatchProcessing
+public class FinancialBatchJobConfig {
+    
+    // JobRepository and TransactionManager will be autowired
+    
+    /**
+     * Creates the main job for processing financial transactions.
+     * Includes comprehensive flow control and error handling.
+     */
+    @Bean
+    public Job financialTransactionJob(
+            JobRepository jobRepository,
+            Step processTransactionsStep,
+            Step generateReportsStep,
+            JobCompletionNotificationListener listener) {
+    }</pre>
+    </div>
+    
+    <h4>Step 3: Use GenAI to generate test cases</h4>
+    
+    <div class="note">
+        <p><strong>Go back to standalone AI for comprehensive test planning</strong></p>
+        
+        <p><strong>PROMPT:</strong></p>
+        <pre>Create comprehensive test cases for our Spring Batch financial transaction processing job with these details:
+
+Components to test:
+- TransactionItemReader: Reads CSV files with financial transaction data
+- TransactionItemProcessor: Validates and enriches transaction data
+- TransactionItemWriter: Writes processed data to Oracle database
+- FinancialBatchJobConfig: Configures the overall job and steps
+
+Key test scenarios:
+1. Job completes successfully with valid input data
+2. Job handles and skips invalid records properly
+3. Job fails appropriately when critical errors occur
+4. Transaction enrichment works correctly with reference data
+5. Fee and tax calculations are accurate for different transaction types
+6. Batch restart works after a failure
+7. Performance meets requirements with large datasets
+
+Technical context:
+- Spring Boot 3.2 test framework
+- JUnit 5 with Mockito
+- TestContainers for Oracle database integration tests
+- Spring Batch test utilities
+
+Please provide complete test classes with setup, execution, and assertions.</pre>
+    </div>
+    
+    <h4>Step 4: Use GitHub Copilot to implement database integration</h4>
+    
+    <div class="note">
+        <p><strong>Return to GitHub Copilot for implementation details</strong></p>
+        
+        <pre>/**
+ * Repository interface for financial transactions with Oracle-specific optimizations.
+ * 
+ * Database context:
+ * - FINANCIAL_TRANSACTIONS table partitioned by transaction_date
+ * - High volume inserts during batch processing (millions per job)
+ * - Frequent querying by customer_id and transaction_type
+ * - Complex reporting queries requiring optimization
+ * 
+ * Performance requirements:
+ * - Batch inserts must process 10,000+ records per second
+ * - Queries should return within 100ms for customer transaction history
+ * - Support for both OLTP and analytical queries
+ * 
+ * Oracle-specific considerations:
+ * - Uses Oracle partitioning for historical data
+ * - Implements Oracle BATCH hints for mass inserts
+ * - Uses function-based indexes for transaction type lookups
+ */
+@Repository
+public interface FinancialTransactionRepository extends JpaRepository<FinancialTransaction, Long> {
+    
+    /**
+     * Finds all transactions for a customer within a date range.
+     * Uses Oracle partition pruning for performance.
+     */
+    @Query(value = "SELECT /*+ INDEX(ft IDX_FT_CUSTOMER) */ ft.* " +
+           "FROM financial_transactions ft " +
+           "WHERE ft.customer_id = :customerId " +
+           "AND ft.transaction_date BETWEEN :startDate AND :endDate " +
+           "ORDER BY ft.transaction_date DESC",
+           nativeQuery = true)
+    List<FinancialTransaction> findTransactionsByCustomerAndDateRange(
+            @Param("customerId") Long customerId,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate);
+}</pre>
+    </div>
+    
+    <h2>Summary: Key Techniques for Effective GenAI Use</h2>
+    
+    <h3>For Prompt Engineering:</h3>
+    <ol>
+        <li><strong>Be Specific:</strong> Provide exact versions, technologies, and implementation details</li>
+        <li><strong>Structure Your Prompts:</strong> Organize requirements in a clear, logical way</li>
+        <li><strong>Include Context:</strong> Technical environment, business needs, constraints</li>
+        <li><strong>Specify Output Format:</strong> Define exactly what deliverables you expect</li>
+        <li><strong>Address Non-Functionals:</strong> Include performance, security, and scalability requirements</li>
+    </ol>
+    
+    <h3>For GitHub Copilot:</h3>
+    <ol>
+        <li><strong>Detailed Comments:</strong> Write comprehensive documentation above your code</li>
+        <li><strong>Technical Context:</strong> Describe the technical environment and constraints</li>
+        <li><strong>Implementation Details:</strong> Outline specific behaviors and requirements</li>
+        <li><strong>Cross-References:</strong> Reference related components with @see tags</li>
+        <li><strong>Structure:</strong> Use JavaDoc formatting for better parsing</li>
+    </ol>
+    
+    <h3>For Combined Workflow:</h3>
+    <ol>
+        <li><strong>Design with AI:</strong> Start with high-level architecture using standalone AI</li>
+        <li><strong>Implement with Copilot:</strong> Use detailed comments to guide implementation</li>
+        <li><strong>Test Planning with AI:</strong> Generate comprehensive test strategies</li>
+        <li><strong>Refine with Copilot:</strong> Implement tests and optimizations in the IDE</li>
+        <li><strong>Document with AI:</strong> Create comprehensive documentation</li>
+    </ol>
+    
+    <h2>Prompt Templates for Java Development</h2>
+    
+    <h3>Spring Boot REST API Template</h3>
+    <pre>Create a Spring Boot REST API for [resource] with these specifications:
+
+Technical requirements:
+- Spring Boot [version]
+- Java [version]
+- [Database] integration
+- [Authentication mechanism]
+
+API endpoints needed:
+1. GET /api/[resource] - List all with pagination and sorting
+2. GET /api/[resource]/{id} - Get by ID
+3. POST /api/[resource] - Create new resource
+4. PUT /api/[resource]/{id} - Update existing resource
+5. DELETE /api/[resource]/{id} - Delete resource
+
+Entity fields:
+- [List all fields with types and validation requirements]
+
+Additional requirements:
+- [Error handling specifics]
+- [Security requirements]
+- [Performance considerations]
+- [Other specific needs]</pre>
+    
+    <h3>Spring Batch Job Template</h3>
+    <pre>Create a Spring Batch job for processing [data type] with these requirements:
+
+Technical stack:
+- Spring Boot [version] with Spring Batch
+- Java [version]
+- [Database] for job repository and data storage
+
+Input details:
+- [Input format and structure]
+- [Data volume expectations]
+- [File location or source details]
+
+Processing requirements:
+1. [Validation rules]
+2. [Transformation needs]
+3. [Enrichment requirements]
+4. [Business logic to apply]
+
+Output requirements:
+- [Destination details]
+- [Format and structure]
+- [Required reports or summaries]
+
+Performance needs:
+- [Processing time requirements]
+- [Resource utilization constraints]
+- [Error handling and recovery approach]</pre>
+    
+    <h3>Oracle SQL Optimization Template</h3>
+    <pre>Optimize this Oracle SQL query for performance:
+
+[Original query]
+
+Database context:
+- Oracle [version]
+- Table sizes: [approximate row counts]
+- Existing indexes: [list indexes]
+- Hardware: [relevant specifications]
+
+Query requirements:
+- Must return [specific data needs]
+- Typical parameter values: [examples]
+- Performance target: [execution time goal]
+
+Known issues with current query:
+- [Identified problems]
+- [Current execution time or performance metrics]
+
+Additional considerations:
+- [Concurrency requirements]
+- [Maintenance windows]
+- [Other relevant constraints]</pre>
+    
+    <h2>GitHub Copilot Comment Templates</h2>
+    
+    <h3>Service Class Template</h3>
+    <pre>/**
+ * [Service name] handles [business function] in the [system name].
+ * 
+ * Technical context:
+ * - Spring Boot [version] application with [relevant features]
+ * - Integration with [database/external systems]
+ * - [Other technical details]
+ * 
+ * Business requirements:
+ * - [Key business function 1]
+ * - [Key business function 2]
+ * - [Key business function 3]
+ * - [Key business function 4]
+ * 
+ * Performance requirements:
+ * - [Processing time expectations]
+ * - [Concurrency considerations]
+ * - [Resource utilization limits]
+ * 
+ * @author [Your Name]
+ */</pre>
+    
+    <h3>Repository Interface Template</h3>
+    <pre>/**
+ * Repository for [Entity] operations with [database]-specific optimizations.
+ * 
+ * Technical context:
+ * - Spring Data JPA [version] with [ORM details]
+ * - [Database name] database with [special features]
+ * - [Usage patterns and volume]
+ * 
+ * Entity details:
+ * - [Key entity characteristics]
+ * - [Relationships with other entities]
+ * - [Special data handling needs]
+ * 
+ * Performance considerations:
+ * - [Query optimization techniques]
+ * - [Caching strategy]
+ * - [Batch operation approach]
+ * 
+ * Monitoring and metrics:
+ * - [What should be tracked/logged]
+ * - [Performance indicators]
+ */</pre>
+    
+    <h3>Spring Batch Step Template</h3>
+    <pre>/**
+ * Creates a step for processing [data type] from [source].
+ * 
+ * Technical context:
+ * - Spring Batch [version] with [processing approach]
+ * - [Error handling strategy]
+ * - [Concurrency approach]
+ * 
+ * Step behavior:
+ * 1. [First processing action]
+ * 2. [Second processing action]
+ * 3. [Third processing action]
+ * 4. [Fourth processing action]
+ * 
+ * Error handling:
+ * - [Skip policy details]
+ * - [Retry approach]
+ * - [Error logging/notification]
+ * 
+ * @param [first parameter] [parameter description]
+ * @param [second parameter] [parameter description]
+ * @return [description of returned Step]
+ */</pre>
+    
+    <h2>Resources and Next Steps</h2>
+    
+    <h3>Recommended Reading</h3>
+    <ul>
+        <li>Spring Framework Documentation: <a href="https://docs.spring.io">https://docs.spring.io</a></li>
+        <li>Oracle Database Performance Tuning Guide</li>
+        <li>Effective Java by Joshua Bloch</li>
+        <li>GitHub Copilot Documentation</li>
+    </ul>
+    
+    <h3>Practice Exercises</h3>
+    <ol>
+        <li>Take an existing basic Spring Boot application and enhance it using the techniques learned</li>
+        <li>Create a Spring Batch job for processing large datasets</li>
+        <li>Optimize an existing Oracle SQL query using the prompt template</li>
+        <li>Refactor existing code using GitHub Copilot with enhanced comments</li>
+    </ol>
+    
+    <div class="note">
+        <p><strong>Remember:</strong> The quality of your AI-generated code is directly proportional to the quality of your prompts and comments. Invest time in crafting detailed, specific instructions to get the best results.</p>
+    </div>
+</body>
+</html>
